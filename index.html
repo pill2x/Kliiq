@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kliiq - Intelligent Software Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Kliiq</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#packs" class="nav-link">Packs</a>
+                <a href="#dashboard" class="nav-link">Dashboard</a>
+            </div>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Install. Update. Manage. <span class="highlight">Repair.</span>
+                </h1>
+                <p class="hero-subtitle">
+                    One intelligent tool for the full software lifecycle. 
+                    No more fragmented, outdated, and painful installations.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="scrollToSection('packs')">
+                        <i class="fas fa-download"></i>
+                        Start Installing
+                    </button>
+                    <button class="btn btn-secondary" onclick="scrollToSection('features')">
+                        <i class="fas fa-play"></i>
+                        See How It Works
+                    </button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="app-grid">
+                    <div class="app-card installing">
+                        <i class="fab fa-vscode"></i>
+                        <span>VS Code</span>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    <div class="app-card installed">
+                        <i class="fab fa-chrome"></i>
+                        <span>Chrome</span>
+                        <div class="status-badge">✓</div>
+                    </div>
+                    <div class="app-card updating">
+                        <i class="fab fa-slack"></i>
+                        <span>Slack</span>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 45%"></div>
+                        </div>
+                    </div>
+                    <div class="app-card installed">
+                        <i class="fab fa-figma"></i>
+                        <span>Figma</span>
+                        <div class="status-badge">✓</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Why Kliiq?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3>One-Click Multi-App Install</h3>
+                    <p>Install multiple applications simultaneously with a single click. No more waiting for one installer to finish before starting the next.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Auto-Update All Apps</h3>
+                    <p>Keep all your software up-to-date automatically. Never worry about outdated applications or security vulnerabilities.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-broom"></i>
+                    </div>
+                    <h3>One-Click Uninstall & Cleanup</h3>
+                    <p>Remove applications completely with all their associated files, registry entries, and leftover data.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Repair Broken Installs</h3>
+                    <p>Fix corrupted installations, missing dependencies, and broken shortcuts automatically.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI-Driven Recommendations</h3>
+                    <p>Get intelligent suggestions for software based on your usage patterns and professional needs.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Offline-First Installer Packs</h3>
+                    <p>Download complete installer packs for offline installation. Perfect for emerging markets and remote locations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packs Section -->
+    <section id="packs" class="packs">
+        <div class="container">
+            <h2 class="section-title">Curated Software Packs</h2>
+            <p class="section-subtitle">Pre-configured bundles for different professional needs</p>
+            
+            <div class="packs-grid">
+                <div class="pack-card" data-pack="dev">
+                    <div class="pack-header">
+                        <div class="pack-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>Developer Pack</h3>
+                        <p class="pack-description">Essential tools for modern development</p>
+                    </div>
+                    <div class="pack-apps">
+                        <div class="app-item">
+                            <i class="fab fa-vscode"></i>
+                            <span>VS Code</span>
+                        </div>
+                        <div class="app-item">
+                            <i class="fab fa-git-alt"></i>
+                            <span>Git</span>
+                        </div>
+                        <div class="app-item">
+                            <i class="fab fa-node-js"></i>
+                            <span>Node.js</span>
+                        </div>
+                        <div class="app-item">
+                            <i class="fab fa-docker"></i>
+                            <span>Docker</span>
+                        </div>
+                        <div class="app-item">
+                            <i class="fas fa-database"></i>
+                            <span>PostgreSQL</span>
+                        </div>
+                        <div class="app-item">
+                            <i class="fab fa-python"></i>
+                            <span>Python</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary pack-install-btn" onclick="installPack('dev')">
+                        <i class="fas fa-download"></i>
+                        Install Pack
+                    </button>
+                </div>
+
+                <div class="pack-card" data-pack="designer">
+                    <div class="pack-header">
+                        <div class="pack-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h3>Designer Pack</h3>
+                        <p class="pack-description">Creative tools for designers and artists</p>
+                    </div>
+                    <div class="pack-apps">
+                        <div class="app-item">
+                            <i class="fab fa-figma"></i>
+                            <span>Figma</span>
+                        </div>
+                        <div class="app-item">
+                            <i class="fab fa-adobe"></i>
+                            <span>Photoshop</span>
+                        </div>
+                        <div class="app-item">
+                            <i class="fab fa-adobe"></i>
+                            <span>Illustrator</span>
+                        </div>
+                        <div class="app-item">
+                            <i class="fas fa-video"></i>
+                            <span>After Effects</span>
+                        </div>
+                        <div class="app-item">
+                            <i class="fas fa-cube"></i>
+                            <span>Blender</span>
+                        </div>
+                        <div class="app-item">
+                            <i class="fas fa-paint-brush"></i>
+                            <span>Sketch</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary pack-install-btn" onclick="installPack('designer')">
+                        <i class="fas fa-download"></i>
+                        Install Pack
+                    </button>
+                </div>
+
+                <div class="pack-card" data-pack="gamer">
+                    <div class="pack-header">
+                        <div class="pack-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h3>Gamer Pack</h3>
+                        <p class="pack-description">Essential gaming software and tools</p>
+                    </div>
+                    <div class="pack-apps">
+                        <div class="app-item">
+                            <i class="fab fa-steam"></i>
+                            <span>Steam</span>
+                        </div>
+                        <div class="app-item">
+                            <i class="fas fa-headset"></i>
+                            <span>Discord</span>
+                        </div>
+                        <div class="app-item">
+                            <i class="fas fa-microphone"></i>
+                            <span>OBS Studio</span>
+                        </div>
+                        <div class="app-item">
+                            <i class="fas fa-chart-line"></i>
+                            <span>MSI Afterburner</span>
+                        </div>
+                        <div class="app-item">
+                            <i class="fas fa-keyboard"></i>
+                            <span>Razer Synapse</span>
+                        </div>
+                        <div class="app-item">
+                            <i class="fas fa-trophy"></i>
+                            <span>Epic Games</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary pack-install-btn" onclick="installPack('gamer')">
+                        <i class="fas fa-download"></i>
+                        Install Pack
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="dashboard">
+        <div class="container">
+            <h2 class="section-title">Software Dashboard</h2>
+            <p class="section-subtitle">Manage all your installed applications</p>
+            
+            <div class="dashboard-controls">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search applications..." id="appSearch">
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="installed">Installed</button>
+                    <button class="filter-btn" data-filter="updates">Updates Available</button>
+                    <button class="filter-btn" data-filter="broken">Needs Repair</button>
+                </div>
+            </div>
+
+            <div class="apps-grid" id="appsGrid">
+                <!-- Apps will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Kliiq</h3>
+                    <p>Intelligent software management for the modern world.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#packs">Packs</a></li>
+                        <li><a href="#dashboard">Dashboard</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Kliiq. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Installation Modal -->
+    <div id="installModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Installing Software Pack</h3>
+                <button class="modal-close" onclick="closeInstallModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="install-progress">
+                    <div class="progress-info">
+                        <span id="currentApp">Preparing installation...</span>
+                        <span id="progressText">0%</span>
+                    </div>
+                    <div class="progress-bar-large">
+                        <div class="progress-large" id="progressBar"></div>
+                    </div>
+                </div>
+                <div class="install-list" id="installList">
+                    <!-- Installation items will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
