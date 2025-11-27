@@ -119,3 +119,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Support
 
 For support, email support@kliiq.com or visit our [documentation](https://docs.kliiq.com).
+# Redeploy trigger
