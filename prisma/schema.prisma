@@ -1,0 +1,146 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String     @id @default(cuid())
+  email     String     @unique
+  password  String
+  name      String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  installations Installation[]
+  updates       Update[]
+  recommendations Recommendation[]
+
+  @@map("users")
+}
+
+model Application {
+  id          String     @id @default(cuid())
+  name        String     @unique
+  description String?
+  iconUrl     String?
+  category    String
+  developer   String?
+  website     String?
+  downloadUrl String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  versions      Version[]
+  installations Installation[]
+  packApplications PackApplication[]
+  recommendations Recommendation[]
+
+  @@map("applications")
+}
+
+model Version {
+  id            String   @id @default(cuid())
+  applicationId String
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  versionNumber String
+  releaseDate   DateTime
+  downloadUrl   String
+  size          BigInt
+  changelog     String?
+  createdAt     DateTime @default(now())
+
+  installations Installation[]
+  updatesFrom   Update[] @relation("UpdateFrom")
+  updatesTo     Update[] @relation("UpdateTo")
+
+  @@unique([applicationId, versionNumber])
+  @@map("versions")
+}
+
+model Installation {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  applicationId String
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  versionId     String
+  version       Version  @relation(fields: [versionId], references: [id], onDelete: Cascade)
+  status        String   @default("installed")
+  installPath   String?
+  installedAt   DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([userId, applicationId])
+  @@map("installations")
+}
+
+model Update {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fromVersionId String
+  fromVersion   Version  @relation("UpdateFrom", fields: [fromVersionId], references: [id], onDelete: Cascade)
+  toVersionId   String
+  toVersion     Version  @relation("UpdateTo", fields: [toVersionId], references: [id], onDelete: Cascade)
+  status        String   @default("available")
+  createdAt     DateTime @default(now())
+  completedAt   DateTime?
+
+  @@map("updates")
+}
+
+model Pack {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  category    String
+  createdAt   DateTime @default(now())
+
+  packApplications PackApplication[]
+
+  @@map("packs")
+}
+
+model PackApplication {
+  id            String   @id @default(cuid())
+  packId        String
+  pack          Pack     @relation(fields: [packId], references: [id], onDelete: Cascade)
+  applicationId String
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+
+  @@unique([packId, applicationId])
+  @@map("pack_applications")
+}
+
+model Recommendation {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  applicationId String
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  score         Float
+  reason        String?
+  createdAt     DateTime @default(now())
+
+  @@unique([userId, applicationId])
+  @@map("recommendations")
+}
+
+model SystemRepair {
+  id          String   @id @default(cuid())
+  userId      String?
+  issueType   String
+  description String
+  resolved    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  resolvedAt  DateTime?
+
+  @@map("system_repairs")
+}

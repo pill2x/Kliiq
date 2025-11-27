@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: kliiq_db
+    environment:
+      POSTGRES_USER: kliiq_user
+      POSTGRES_PASSWORD: kliiq_password
+      POSTGRES_DB: kliiq
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kliiq_user -d kliiq"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    container_name: kliiq_app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://kliiq_user:kliiq_password@db:5432/kliiq
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-super-secret-key-change-in-prod}
+      NEXTAUTH_URL: http://localhost:3000
+      NODE_ENV: development
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    command: npm run dev
+
+volumes:
+  postgres_data:

@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: kliiq_db_prod
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER:-kliiq_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME:-kliiq}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./prisma/migrations:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-kliiq_user} -d ${DB_NAME:-kliiq}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - kliiq_network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: kliiq_app_prod
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://${DB_USER:-kliiq_user}:${DB_PASSWORD}@db:5432/${DB_NAME:-kliiq}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-https://kliiq.example.com}
+      NODE_ENV: production
+    ports:
+      - "3000:3000"
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/api/health', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - kliiq_network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  kliiq_network:
+    driver: bridge
